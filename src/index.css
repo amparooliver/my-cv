@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@font-face {
+    font-family: 'myOwnCalig';
+    src: url('/fonts/myOwnCalig.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
