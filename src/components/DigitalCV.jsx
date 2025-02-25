@@ -40,7 +40,7 @@ const DigitalCV = () => {
           </div>
         </div>
         <div className="flex justify-between items-end w-full">
-          <h2 className="text-6xl text-gray-700" style={{ fontFamily: 'myOwnCalig' }}>Computer Engineer Undergraduate</h2>
+          <h2 className="text-6xl text-gray-700 ml-40" style={{ fontFamily: 'myOwnCalig' }}>Computer Engineer Undergraduate</h2>
           <div className="w-1/3">{/* Blank space for future content */}</div>
         </div>
         <div className="mt-7 grid grid-cols-1 md:grid-cols-1 gap-6">
@@ -66,7 +66,7 @@ const DigitalCV = () => {
             {/* Text beside Polaroid */}
             <div className="ml-15 self-start  mt-4 font-inter font-semibold text-lg text-[#83797C] text-1xl ">
               <p className="text-[#5A5355]">Hi, I’m Amparo!</p>
-              <p>A <span className="text-[#5A5355]">Computer Engineer</span> who loves blending tech with creativity.</p>
+              <p>An (almost) <span className="text-[#5A5355]">Computer Engineer</span> who loves blending tech with creativity.</p>
               <p>I’m passionate about making life more fun and positive through AI innovations. </p>
               <p>Whether it’s creating smarter solutions or exploring new ideas, I believe in the power</p>
               <p>of technology to brighten everyday moments.</p>
@@ -74,7 +74,35 @@ const DigitalCV = () => {
           </div>
         </div>
         <div className="relative w-full">
-        <p className="text-5xl text-gray-700 relative" style={{ fontFamily: 'myOwnCalig', top: '-340px', left: '780px' }}>Past <span className="underline cursor-pointer text-[#D4466E]">PROJECTS</span></p>
+        <div className="flex mt-5 ml-40">
+        <img 
+              src="./images/spotifylogo.png" 
+              alt="Spotify Logo" 
+              className="absolute w-full max-w-md transform"
+              style={{ top: '-40px', left: '9%',rotate: '25deg', zIndex: '2', height: '80px', width: '80px' }} // Adjust top and left for positioning
+        />
+        <iframe 
+          className="w-[300px] h-[400px] rounded-lg shadow-lg " 
+          style={{ backgroundColor: "#D6E4C3", zIndex: '1' }} // Light pink background
+          src="https://open.spotify.com/embed/playlist/2FYcEZdDlwqyi61Zh3b8DZ?utm_source=generator" 
+          allowFullScreen 
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+          loading="lazy"
+        ></iframe>
+        <img 
+              src="./images/taylor.png" 
+              alt="Taylow Swift" 
+              className="absolute w-full max-w-md transform scale-50"
+              style={{ top: '-300px', left: '20%',rotate: '-15deg' }} // Adjust top and left for positioning
+        />
+        <img 
+              src="./images/sabrina.png" 
+              alt="Sabrina Carpenter" 
+              className="absolute w-full max-w-md transform scale-50"
+              style={{ top: '-50px', left: '-7%', rotate: '15deg' }} // Adjust top and left for positioning
+        />
+      </div>
+      <p className="text-5xl text-gray-700 relative" style={{ fontFamily: 'myOwnCalig', top: '-740px', left: '780px' }}>Past <span className="underline cursor-pointer text-[#D4466E]">PROJECTS</span></p>
         <img 
               src="./images/forward.png" 
               alt="Forward button" 
@@ -90,23 +118,30 @@ const DigitalCV = () => {
               onClick={() => handleButtonClick('back1')}
         />
         <img 
+              src="./images/star.png" 
+              alt="Green star" 
+              className="absolute  w-full max-w-md transform scale-50"
+              style={{ top: '-490px', left: '60%' }} // Adjust top and left for positioning
+        />
+        <img 
               src="./images/VintagePC.png" 
               alt="Vintage PC " 
               className="absolute w-full max-w-md transform scale-100"
               style={{ top: '-300px', left: '50%' }} // Adjust top and left for positioning
         />
+
         <img 
               src="./images/forward.png" 
               alt="Forward button" 
               className={`absolute transition-transform duration-150 cursor-pointer ${pressedButton === 'forward2' ? 'scale-90' : 'scale-100'}`}
-              style={{ top: '-280px', left: '80%' }} // Adjust top and left for positioning
+              style={{ top: '-120px', left: '80%' }} // Adjust top and left for positioning
               onClick={() => handleButtonClick('forward2')}
         />
         <img 
               src="./images/back.png" 
               alt="Forward button" 
               className={`absolute transition-transform duration-150 cursor-pointer ${pressedButton === 'back2' ? 'scale-90' : 'scale-100'}`}
-              style={{ top: '-200px', left: '80%' }} // Adjust top and left for positioning
+              style={{ top: '-40px', left: '80%' }} // Adjust top and left for positioning
               onClick={() => handleButtonClick('back2')}
         />
         </div>
