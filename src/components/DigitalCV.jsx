@@ -1,16 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const DigitalCV = () => {
   const [isPolaroidOnTop, setIsPolaroidOnTop] = useState(false);
   const [pressedButton, setPressedButton] = useState(null); // Track which button is pressed
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const audio = new Audio('./sounds/mouse-click.mp3'); // Replace with your sound file path
+  const audio = new Audio("./sounds/mouse-click.mp3");
   const retroClick = new Audio("./sounds/retro-click.mp3");
+
+  const imagePaths = [
+    "./images/LandingPageMessiBW.png",
+    "./images/LandingPageAlmironBW.png",
+    "./images/NoMore.png",
+  ];
+
 
   const togglePolaroidPosition = () => {
     setIsPolaroidOnTop((prev) => !prev);
-    audio.currentTime = 0; // Reset sound to start
-    audio.play(); // Play click sound
+    audio.currentTime = 0;
+    audio.play();
     console.log("isPolaroidOnTop:", !isPolaroidOnTop);
   };
 
@@ -18,14 +26,54 @@ const DigitalCV = () => {
     retroClick.currentTime = 0;
     retroClick.play();
 
-    setPressedButton(button); // Set button as pressed
+    setPressedButton(button);
     setTimeout(() => {
-      setPressedButton(null); // Reset after 150ms
+      setPressedButton(null);
     }, 150);
   };
 
+  const handleForward = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imagePaths.length);
+    handleButtonClick("forward2");
+  };
+
+  const handleBack = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? imagePaths.length - 1 : prevIndex - 1
+    );
+    handleButtonClick("back2");
+  };
+
+  const handleForward1 = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imagePaths.length);
+    handleButtonClick("forward1");
+  };
+
+  const handleBack1 = () => {
+        setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? imagePaths.length - 1 : prevIndex - 1
+    );
+    handleButtonClick("back1");
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "ArrowRight") {
+        handleForward1();
+      } else if (event.key === "ArrowLeft") {
+        handleBack1();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleForward1, handleBack1]);
+
   return (
-    <div className="min-h-screen bg-white bg-[linear-gradient(to_right,transparent_24px,rgba(212,70,110,0.30)_25px,transparent_26px),linear-gradient(to_bottom,transparent_24px,rgba(212,70,110,0.30)_25px,transparent_26px)] bg-[size:25px_25px] flex flex-col items-center p-5">
+    <div className="min-h-screen bg-white bg-[linear-gradient(to_right,transparent_24px,rgba(212,70,110,0.30)_25px,transparent_26px),linear-gradient(to_bottom,transparent_24px,rgba(212,70,110,0.30)_25px,transparent_26px)] bg-[size:25px_25px] flex flex-col items-center p-5" style={{overflow: 'hidden', maxWidth: '1800px', margin: '0 auto'}}>
       <div className="w-full relative">
         <div className="flex justify-between items-center w-full">
           <h1 className="text-7xl font-bold text-[#D4466E] text-left">Amparo Oliver Buzali</h1>
@@ -101,21 +149,31 @@ const DigitalCV = () => {
               className="absolute w-full max-w-md transform scale-50"
               style={{ top: '-50px', left: '-7%', rotate: '15deg' }} // Adjust top and left for positioning
         />
+        <img 
+              src="./images/pods.png" 
+              alt="Auriculares" 
+              className="absolute w-full max-w-md transform scale-100"
+              style={{ top: '90px', left: '20%', rotate: '40deg' }} // Adjust top and left for positioning
+        />
       </div>
       <p className="text-5xl text-gray-700 relative" style={{ fontFamily: 'myOwnCalig', top: '-740px', left: '780px' }}>Past <span className="underline cursor-pointer text-[#D4466E]">PROJECTS</span></p>
         <img 
               src="./images/forward.png" 
               alt="Forward button" 
-              className={`absolute transition-transform duration-150 cursor-pointer ${pressedButton === 'forward1' ? 'scale-90' : 'scale-100'}`}
-              style={{ top: '-280px', left: '45%' }} // Adjust top and left for positioning
-              onClick={() => handleButtonClick('forward1')}
+              className={`absolute transition-transform duration-150 cursor-pointer ${
+                pressedButton === "forward1" ? "scale-90" : "scale-100"
+              }`}
+              style={{ top: "-280px", left: "45%" }}
+              onClick={handleForward1}
         />
-        <img 
-              src="./images/back.png" 
-              alt="Forward button" 
-              className={`absolute transition-transform duration-150 cursor-pointer ${pressedButton === 'back1' ? 'scale-90' : 'scale-100'}`}
-              style={{ top: '-200px', left: '45%' }} // Adjust top and left for positioning
-              onClick={() => handleButtonClick('back1')}
+        <img
+          src="./images/back.png"
+          alt="Forward button"
+          className={`absolute transition-transform duration-150 cursor-pointer ${
+            pressedButton === "back1" ? "scale-90" : "scale-100"
+          }`}
+          style={{ top: "-200px", left: "45%" }}
+          onClick={handleBack1}
         />
         <img 
               src="./images/star.png" 
@@ -129,20 +187,30 @@ const DigitalCV = () => {
               className="absolute w-full max-w-md transform scale-100"
               style={{ top: '-300px', left: '50%' }} // Adjust top and left for positioning
         />
-
-        <img 
-              src="./images/forward.png" 
-              alt="Forward button" 
-              className={`absolute transition-transform duration-150 cursor-pointer ${pressedButton === 'forward2' ? 'scale-90' : 'scale-100'}`}
-              style={{ top: '-120px', left: '80%' }} // Adjust top and left for positioning
-              onClick={() => handleButtonClick('forward2')}
+        <img
+          src={imagePaths[currentImageIndex]}
+          alt={`Imagen ${currentImageIndex + 1}`}
+          className="absolute w-full max-w-md transform"
+          style={{ top: "-300px", left: "50%", scale: "0.7" }}
         />
-        <img 
-              src="./images/back.png" 
-              alt="Forward button" 
-              className={`absolute transition-transform duration-150 cursor-pointer ${pressedButton === 'back2' ? 'scale-90' : 'scale-100'}`}
-              style={{ top: '-40px', left: '80%' }} // Adjust top and left for positioning
-              onClick={() => handleButtonClick('back2')}
+
+        <img
+          src="./images/forward.png"
+          alt="Forward button"
+          className={`absolute transition-transform duration-150 cursor-pointer ${
+            pressedButton === "forward2" ? "scale-90" : "scale-100"
+          }`}
+          style={{ top: "-120px", left: "80%" }}
+          onClick={handleForward}
+        />
+        <img
+          src="./images/back.png"
+          alt="Forward button"
+          className={`absolute transition-transform duration-150 cursor-pointer ${
+            pressedButton === "back2" ? "scale-90" : "scale-100"
+          }`}
+          style={{ top: "-40px", left: "80%" }}
+          onClick={handleBack}
         />
         </div>
       </div>
