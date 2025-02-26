@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const DigitalCV = () => {
   const [isPolaroidOnTop, setIsPolaroidOnTop] = useState(false);
+  const [isHackathonOnTop, setIsHackathonOnTop] = useState(false);
   const [pressedButton, setPressedButton] = useState(null); // Track which button is pressed
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -20,6 +21,13 @@ const DigitalCV = () => {
     audio.currentTime = 0;
     audio.play();
     console.log("isPolaroidOnTop:", !isPolaroidOnTop);
+  };
+
+  const toggleHackathonPosition = () => {
+    setIsHackathonOnTop((prev) => !prev);
+    audio.currentTime = 0;
+    audio.play();
+    console.log("isHackathonOnTop:", !isHackathonOnTop);
   };
 
   const handleButtonClick = (button) => {
@@ -83,8 +91,21 @@ const DigitalCV = () => {
               alt="iPad and Pencil" 
               className="absolute w-full max-w-md transform -rotate-45 scale-140"
               style={{ top: '-200px', left: '30%' }} // Adjust top and left for positioning
+              draggable="false"
             />
-            <p className="text-5xl text-black rotate-45 relative z-20" style={{ fontFamily: 'myOwnCalig', top: '285px', left: '25px' }}>wanna learn more <span className="underline cursor-pointer text-[#D4466E]">ABOUT ME?</span></p>
+            <p
+              className="text-5xl text-black rotate-45 relative z-20"
+              style={{ fontFamily: 'myOwnCalig', top: '285px', left: '25px' }}>
+              wanna learn more <a
+                href="/my-cv/documents/2025_CV_Oliver.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="underline cursor-pointer text-[#D4466E]">
+                  ABOUT ME?
+                </span>
+              </a>
+            </p>
             <p className="text-2xl text-[#1E1E1E] rotate-45 relative z-20" style={{ fontFamily: 'myOwnCalig', top: '460px', left: '190px' }}>(click me)</p>
           </div>
         </div>
@@ -104,6 +125,7 @@ const DigitalCV = () => {
                 left: '4%',
               }}
               onClick={togglePolaroidPosition}
+              draggable="false"
             />
             {/* Notebook Image */}
             <img
@@ -111,6 +133,7 @@ const DigitalCV = () => {
               alt="Notebook"
               className="relative z-10"
               style={{ left: '-100px', height: '500px', top: '-10px' }} // Adjust values as needed
+              draggable="false"
             />
             {/* Text beside Polaroid */}
             <div className="ml-15 self-start  mt-4 font-inter font-semibold text-lg text-[#83797C] text-1xl ">
@@ -130,6 +153,7 @@ const DigitalCV = () => {
               alt="Spotify Logo" 
               className="absolute w-full max-w-md transform"
               style={{ top: '30px', left: '1%',rotate: '25deg', zIndex: '2', height: '80px', width: '80px' }} // Adjust top and left for positioning
+              draggable="false"
         />
         <iframe 
           className="w-[300px] h-[400px] rounded-lg shadow-lg " 
@@ -144,33 +168,39 @@ const DigitalCV = () => {
               alt="Taylow Swift" 
               className="absolute w-full max-w-md transform scale-50"
               style={{ top: '-300px', left: '20%',rotate: '-15deg' }} // Adjust top and left for positioning
+              draggable="false"
         />
         <img 
               src="./images/sabrina.png" 
               alt="Sabrina Carpenter" 
               className="absolute w-full max-w-md transform scale-50"
               style={{ top: '-50px', left: '-7%', rotate: '15deg' }} // Adjust top and left for positioning
+              draggable="false"
         />
         <img 
               src="./images/pods.png" 
               alt="Auriculares" 
               className="absolute w-full max-w-md transform scale-100"
               style={{ top: '90px', left: '20%', rotate: '40deg' }} // Adjust top and left for positioning
+              draggable="false"
         />
         <img src="./images/beigeNote.png" 
             alt="Paper" 
             className="absolute w-full max-w-md transform"
-            style={{ top: '200px', left: '50%',transform: 'scale(1.2)'}} 
+            style={{ top: '60%', left: '65%',transform: 'scale(1.1)'}} 
+            draggable="false"
         />
-        <img src="./images/miniPinkNotebook.png" 
-            alt="Paper" 
+        <img src="./images/miniGreenNotebook.png" 
+            alt="Green Notebook" 
             className="absolute w-full max-w-md transform"
-            style={{ top: '320px', left: '40%',transform: 'scale(0.9)' }} 
+            style={{ top: '320px', left: '45%',transform: 'scale(1.2)' }} 
+            draggable="false"
        />
       <img src="./images/polaroid2.png" 
             alt="Polaroid2" 
             className="absolute w-full max-w-md transform"
-            style={{ top: '320px', left: '40%',transform: 'scale(1)' }} 
+            style={{ top: '45%', left: '47%',transform: 'scale(0.5)' }} 
+            draggable="false"
        />
       </div>
         <a
@@ -179,6 +209,7 @@ const DigitalCV = () => {
           rel="noopener noreferrer" // Mejores prácticas de seguridad
           className="absolute flex items-center"
           style={{ top: "-110px", rotate: "-22deg", left: "90px",zIndex: "50" }}
+          draggable="false"
         >
           <p className="font-inter font-semibold text-lg text-[#83797C] text-1xl mr-2">
             Follow my journey on <span className="underline text-[#D4466E]">LinkedIn!</span>
@@ -187,6 +218,7 @@ const DigitalCV = () => {
             src="./images/linkedinLogo.png"
             alt="LinkedIn Logo"
             style={{ height: "40px"}}
+            draggable="false"
           />
         </a>
       <p className="text-5xl text-gray-700 relative" style={{ fontFamily: 'myOwnCalig', top: '-740px', left: '51%' }}>Past <span className="underline cursor-pointer text-[#D4466E]">PROJECTS</span></p>
@@ -198,6 +230,7 @@ const DigitalCV = () => {
               }`}
               style={{ top: "-280px", left: "43%" }}
               onClick={handleForward1}
+              draggable="false"
         />
         <img
           src="./images/back.png"
@@ -207,24 +240,28 @@ const DigitalCV = () => {
           }`}
           style={{ top: "-200px", left: "43%" }}
           onClick={handleBack1}
+          draggable="false"
         />
         <img 
               src="./images/star.png" 
               alt="Green star" 
               className="absolute  w-full max-w-md transform scale-50"
               style={{ top: '-490px', left: '58%' }} // Adjust top and left for positioning
+              draggable="false"
         />
         <img 
               src="./images/VintagePC.png" 
               alt="Vintage PC " 
               className="absolute w-full max-w-md transform scale-100"
               style={{ top: '-300px', left: '48%' }} // Adjust top and left for positioning
+              draggable="false"
         />
         <img
           src={imagePaths[currentImageIndex]}
           alt={`Imagen ${currentImageIndex + 1}`}
           className="absolute w-full max-w-md transform"
           style={{ top: "-300px", left: "48%", scale: "0.7" }}
+          draggable="false"
         />
 
         <img
@@ -235,6 +272,7 @@ const DigitalCV = () => {
           }`}
           style={{ top: "-120px", left: "78%" }}
           onClick={handleForward}
+          draggable="false"
         />
         <img
           src="./images/back.png"
@@ -244,12 +282,31 @@ const DigitalCV = () => {
           }`}
           style={{ top: "-40px", left: "78%" }}
           onClick={handleBack}
+          draggable="false"
         />
           <img
           src="./images/photobooth1.png"
-          alt="Forward button"
-          className="absolute transform duration-150 cursor-pointer"
-          style={{ top: "-474%", left: "43%", scale: "0.11", rotate: "-2deg" }}
+          alt="Hackathon Winners Pics"
+          className={`absolute transform duration-150 cursor-pointer ${
+
+            isHackathonOnTop ? 'z-10' : 'z-20'
+            
+            }`}
+          style={{ top: "-477%", left: "42%", scale: "0.11", rotate: "-12deg", transform: isHackathonOnTop ? 'translateY(-80px)' : 'translateY(-60px)' }}
+          onClick={toggleHackathonPosition}
+          draggable="false"
+        />
+          <img
+          src="./images/photobooth2.png"
+          alt="Salta Trip Pics"
+          className={`absolute transform duration-150 cursor-pointer ${
+
+            isHackathonOnTop ? 'z-20' : 'z-10'
+            
+            }`}
+          style={{ top: "-478%", left: "42%", scale: "0.11", rotate: "5deg",transform: isHackathonOnTop ? 'translateY(-80px)' : 'translateY(-60px)' }}
+          onClick={toggleHackathonPosition}
+          draggable="false"
         />
         </div>
       </div>
